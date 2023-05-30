@@ -39,15 +39,6 @@ jobs:
         uses: azure/CLI@fa0f960f00db49b95fdb54328a767aee31e80105
         with:
           inlineScript: |
-            for f in src/main/conf/acquirers/*.json
-            do
-              az storage blob upload --account-name milconf --container-name acquirer-conf --name $f --file $f
-            done
-            for f in src/main/conf/clients/*.json
-            do
-              az storage blob upload --account-name milconf --container-name client-conf --name $f --file $f
-            done
-            for f in src/main/conf/roles/*.json
-            do
-              az storage blob upload --account-name milconf --container-name role-conf --name $f --file $f
-            done
+            az storage blob upload-batch --destination acquirer-conf --account-name milconf --destination-path / --source src/main/conf/acquirers
+            az storage blob upload-batch --destination client-conf   --account-name milconf --destination-path / --source src/main/conf/clients
+            az storage blob upload-batch --destination role-conf     --account-name milconf --destination-path / --source src/main/conf/roles
