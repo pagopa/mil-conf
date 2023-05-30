@@ -1,0 +1,44 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    environment: dev-cd
+    
+    permissions:
+      id-token: write
+ 
+    steps:
+      #
+      # Login to Azure.
+      #
+      - name: Login to Azure
+        uses: azure/login@92a5484dfaf04ca78a94597f4f19fea633851fa2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+ 
+      #
+      # Upload files.
+      #
+      - name: Upload files
+        uses: azure/CLI@fa0f960f00db49b95fdb54328a767aee31e80105
+        with:
+          inlineScript: |
+            for f in src/main/conf/acquirers/*.json
+            do
+              az storage blob upload --account-name milconf --container-name acquirer-conf --name $f --file $f
+            done
+            for f in src/main/conf/clients/*.json
+            do
+              az storage blob upload --account-name milconf --container-name client-conf --name $f --file $f
+            done
+            for f in src/main/conf/roles/*.json
+            do
+              az storage blob upload --account-name milconf --container-name role-conf --name $f --file $f
+            done
