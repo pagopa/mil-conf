@@ -1,0 +1,7 @@
+{
+	"id": "83c0b10f-b398-4cc8-b356-a3e0f0291679",
+	"channel": "ATM",
+	"salt": "zfN59oSr9RfFiiSASUO1YIcv8bARsj1OAV8tEydQiKC3su5Mlz1TsjbFwvWrGCjXdkDUsbeXGnYZDavJuTKw6Q==",
+	"secretHash": "EIBJ3uXU/tot3EeDeaoBQ0HTuotsfqJqspOMNfNyycU=",
+	"description": "ATM Layer"
+}
