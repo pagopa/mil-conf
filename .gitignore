@@ -1,2 +1,4 @@
 /.project
 /.settings/
+src/main/terraform/identity/.terraform/
+src/main/terraform/identity/.terraform.lock.hcl
