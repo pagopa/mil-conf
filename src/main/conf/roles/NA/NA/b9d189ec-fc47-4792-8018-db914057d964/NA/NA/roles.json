@@ -1,0 +1,10 @@
+{
+	"acquirerId": "NA",
+	"channel": "NA",
+	"clientId": "b9d189ec-fc47-4792-8018-db914057d964",
+	"merchantId": "NA",
+	"terminalId": "NA",
+	"roles": [
+		"ServiceListRequester"
+	]
+}

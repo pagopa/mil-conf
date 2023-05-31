@@ -1,0 +1,10 @@
+{
+	"acquirerId": "4585625",
+	"channel": "POS",
+	"clientId": "5254f087-1214-45cd-94ae-fda53c835197",
+	"merchantId": "12346789",
+	"terminalId": "NA",
+	"roles": [
+		"NoticePayer"
+	]
+}
