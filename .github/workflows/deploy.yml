@@ -39,6 +39,6 @@ jobs:
         uses: azure/CLI@fa0f960f00db49b95fdb54328a767aee31e80105
         with:
           inlineScript: |
-            az storage blob upload-batch --destination acquirer-conf --account-name milconf --destination-path / --source src/main/conf/acquirers
-            az storage blob upload-batch --destination client-conf   --account-name milconf --destination-path / --source src/main/conf/clients
-            az storage blob upload-batch --destination role-conf     --account-name milconf --destination-path / --source src/main/conf/roles
+            az storage blob upload-batch --destination acquirers --account-name milconf --destination-path / --source src/main/conf/acquirers
+            az storage blob upload-batch --destination clients   --account-name milconf --destination-path / --source src/main/conf/clients
+            az storage blob upload-batch --destination roles     --account-name milconf --destination-path / --source src/main/conf/roles
