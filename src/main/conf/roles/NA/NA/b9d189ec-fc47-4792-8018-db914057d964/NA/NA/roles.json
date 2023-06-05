@@ -5,6 +5,6 @@
 	"merchantId": "NA",
 	"terminalId": "NA",
 	"roles": [
-		"ServiceListRequester"
+		"InstitutionPortal"
 	]
 }
