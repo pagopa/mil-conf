@@ -13,6 +13,9 @@ jobs:
     
     environment: ${{ inputs.environment }}
     
+    permissions:
+      id-token: write
+ 
     steps:
       #
       # Checkout the source code.
