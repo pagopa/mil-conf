@@ -5,6 +5,7 @@
 	"merchantId": "28405fHfk73x88D",
 	"terminalId": "NA",
 	"roles": [
-		"NoticePayer"
+		"NoticePayer",
+		"SlavePos"
 	]
 }
