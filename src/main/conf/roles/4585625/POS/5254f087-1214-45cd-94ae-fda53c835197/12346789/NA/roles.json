@@ -6,6 +6,7 @@
 	"terminalId": "NA",
 	"roles": [
 		"NoticePayer",
-		"SlavePos"
+		"SlavePos",
+		"PayWithIDPay"
 	]
 }
