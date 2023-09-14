@@ -5,6 +5,8 @@
 	"merchantId": "NA",
 	"terminalId": "NA",
 	"roles": [
-		"NoticePayer"
+		"NoticePayer",
+		"SlavePos",
+		"PayWithIDPay"
 	]
 }
