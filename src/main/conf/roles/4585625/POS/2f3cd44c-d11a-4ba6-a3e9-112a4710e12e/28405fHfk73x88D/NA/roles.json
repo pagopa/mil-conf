@@ -1,12 +1,10 @@
 {
-	"acquirerId": "4585625",
-	"channel": "POS",
-	"clientId": "2f3cd44c-d11a-4ba6-a3e9-112a4710e12e",
-	"merchantId": "28405fHfk73x88D",
+	"acquirerId": "06789",
+	"channel": "ATM",
+	"clientId": "83c0b10f-b398-4cc8-b356-a3e0f0291679",
+	"merchantId": "NA",
 	"terminalId": "NA",
 	"roles": [
-		"NoticePayer",
-		"SlavePos",
-		"PayWithIDPay"
+		"NoticePayer"
 	]
 }
