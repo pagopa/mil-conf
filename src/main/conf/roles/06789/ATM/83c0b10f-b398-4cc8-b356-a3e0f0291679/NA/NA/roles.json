@@ -6,7 +6,6 @@
 	"terminalId": "NA",
 	"roles": [
 		"NoticePayer",
-		"SlavePos",
-		"PayWithIDPay"
+		"OnboardToIDPay"
 	]
 }
