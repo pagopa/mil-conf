@@ -62,12 +62,12 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true
  
       #
       # Upload files.
       #
       - name: Upload files
-        shell: bash
         run: |
             az storage container delete -n acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
             az storage container delete -n clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
