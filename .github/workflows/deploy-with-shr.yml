@@ -1,0 +1,90 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+        default: 'dev-cd'
+
+jobs:
+
+  create_runner:
+    name: Create Runner
+    runs-on: ubuntu-22.04
+    environment: ${{ inputs.environment }}
+    outputs:
+      runner_name: ${{ steps.create_github_runner.outputs.runner_name }}
+    steps:
+      - name: Create GitHub Runner
+        id: create_github_runner
+        # from https://github.com/pagopa/github-self-hosted-runner-azure-create-action/commits/main
+        uses: pagopa/github-self-hosted-runner-azure-create-action@b4590e069e753daee6bc9809d484523cc7026035
+        with:
+          client_id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          container_app_environment_name: ${{ secrets.AZURE_CONTAINER_APP_ENVIRONMENT_NAME }}
+          resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
+          pat_token: ${{ secrets.GIT_PAT }}
+
+
+  deploy:
+    runs-on: [self-hosted, "${{ needs.create_runner.outputs.runner_name }}"]
+    
+    environment: ${{ inputs.environment }}
+    
+    permissions:
+      id-token: write
+    
+    steps:
+      #
+      # Checkout the source code.
+      #
+      - name: Checkout the source code
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+        with:
+          token: ${{ secrets.GIT_PAT }}
+          fetch-depth: 0
+
+      #
+      # Login to Azure.
+      #
+      - name: Login to Azure
+        uses: azure/login@92a5484dfaf04ca78a94597f4f19fea633851fa2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+ 
+      #
+      # Upload files.
+      #
+      - name: Upload files
+        uses: azure/CLI@fa0f960f00db49b95fdb54328a767aee31e80105
+        with:
+          inlineScript: |
+            az storage blob upload-batch --destination acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/acquirers
+            az storage blob upload-batch --destination clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/clients
+            az storage blob upload-batch --destination roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/roles
+            az storage blob upload-batch --destination users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/users
+            
+            
+  cleanup_runner:
+    name: Cleanup Runner
+    if: always()
+    runs-on: ubuntu-22.04
+    environment: ${{ inputs.environment }}
+    needs: [create_runner, deploy]
+    steps:
+      - name: Cleanup GitHub Runner
+        id: cleanup_github_runner
+        # from https://github.com/pagopa/github-self-hosted-runner-azure-cleanup-action/commits/main
+        uses: pagopa/github-self-hosted-runner-azure-cleanup-action@97731a35e6ffc79b66c4dfd2aae5e4fd04e3ebb5
+        with:
+          client_id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
+          runner_name: ${{ needs.create_runner.outputs.runner_name }}
+          pat_token: ${{ secrets.GIT_PAT }}
