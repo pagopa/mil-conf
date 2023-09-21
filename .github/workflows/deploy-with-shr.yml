@@ -68,7 +68,10 @@ jobs:
       # Upload files.
       #
       - name: Upload files
-        run: |
+        uses: azure/CLI@v1
+        with:
+          azcliversion: latest
+          inlineScript: |
             az storage container delete -n acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
             az storage container delete -n clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
             az storage container delete -n roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
