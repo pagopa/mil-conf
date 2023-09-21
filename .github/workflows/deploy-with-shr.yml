@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy with Self Hosted Runner
 
 on:
   workflow_dispatch:
@@ -10,15 +10,19 @@ on:
 jobs:
 
   create_runner:
-    name: Create Runner
     runs-on: ubuntu-22.04
+    
     environment: ${{ inputs.environment }}
+    
+    permissions:
+      id-token: write
+    
     outputs:
       runner_name: ${{ steps.create_github_runner.outputs.runner_name }}
+    
     steps:
       - name: Create GitHub Runner
         id: create_github_runner
-        # from https://github.com/pagopa/github-self-hosted-runner-azure-create-action/commits/main
         uses: pagopa/github-self-hosted-runner-azure-create-action@b4590e069e753daee6bc9809d484523cc7026035
         with:
           client_id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -71,15 +75,19 @@ jobs:
             
             
   cleanup_runner:
-    name: Cleanup Runner
     if: always()
+    
     runs-on: ubuntu-22.04
+    
     environment: ${{ inputs.environment }}
+    
+    permissions:
+      id-token: write
+    
     needs: [create_runner, deploy]
+    
     steps:
       - name: Cleanup GitHub Runner
-        id: cleanup_github_runner
-        # from https://github.com/pagopa/github-self-hosted-runner-azure-cleanup-action/commits/main
         uses: pagopa/github-self-hosted-runner-azure-cleanup-action@97731a35e6ffc79b66c4dfd2aae5e4fd04e3ebb5
         with:
           client_id: ${{ secrets.AZURE_CLIENT_ID }}
