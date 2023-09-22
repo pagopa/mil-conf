@@ -54,9 +54,12 @@ jobs:
           fetch-depth: 0
 
       - name: Install sudo package
-        run: apt update && apt install sudo
+        shell: bash
+        #run: apt update && apt install sudo
+        run: apt-get update && apt-get install --assume-yes --no-install-recommends sudo
       
       - name: Install Azure cli
+        shell: bash
         run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
       
       #
