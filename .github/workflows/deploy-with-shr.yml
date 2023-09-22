@@ -76,10 +76,10 @@ jobs:
           az storage container create -n clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login --public-access blob
           az storage container create -n roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login --public-access blob
           az storage container create -n users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login --public-access blob
-          az storage blob upload-batch --destination acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/acquirers  --auth-mode login
-          az storage blob upload-batch --destination clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/clients    --auth-mode login
-          az storage blob upload-batch --destination roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/roles      --auth-mode login
-          az storage blob upload-batch --destination users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/users      --auth-mode login
+          az storage blob upload-batch --destination acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/acquirers
+          az storage blob upload-batch --destination clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/clients
+          az storage blob upload-batch --destination roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/roles
+          az storage blob upload-batch --destination users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/users
 
 
   cleanup_runner:
