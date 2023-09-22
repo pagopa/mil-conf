@@ -53,20 +53,11 @@ jobs:
           token: ${{ secrets.GIT_PAT }}
           fetch-depth: 0
 
-      - name: Install sudo package
-        shell: bash
-        #run: apt update && apt install sudo
-        run: apt-get update && apt-get install --assume-yes --no-install-recommends sudo
-      
-      - name: Install Azure cli
-        shell: bash
-        run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-      
       #
       # Login to Azure.
       #
       - name: Login to Azure
-        uses: azure/login@v1
+        uses: azure/login@92a5484dfaf04ca78a94597f4f19fea633851fa2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
@@ -76,14 +67,13 @@ jobs:
       # Upload files.
       #
       - name: Upload files
-        uses: azure/CLI@v1
+        uses: azure/CLI@fa0f960f00db49b95fdb54328a767aee31e80105
         with:
-          azcliversion: latest
           inlineScript: |
             az storage container delete -n acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
             az storage container delete -n clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
             az storage container delete -n roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
-            az storage container delete -n users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}            
+            az storage container delete -n users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
             az storage container create -n acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
             az storage container create -n clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
             az storage container create -n roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
@@ -91,9 +81,9 @@ jobs:
             az storage blob upload-batch --destination acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/acquirers
             az storage blob upload-batch --destination clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/clients
             az storage blob upload-batch --destination roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/roles
-            az storage blob upload-batch --destination users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/users
-            
-            
+            az storage blob upload-batch --destination users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/users}} --destination-path / --source src/main/conf/users
+
+
   cleanup_runner:
     if: always()
     
