@@ -67,7 +67,7 @@ jobs:
       # Upload files.
       #
       - name: Upload files
-        #uses: azure/CLI@fa0f960f00db49b95fdb54328a767aee31e80105
+        uses: azure/CLI@fa0f960f00db49b95fdb54328a767aee31e80105
         with:
           inlineScript: |
             az storage container delete -n acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
