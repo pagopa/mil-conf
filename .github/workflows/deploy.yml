@@ -47,10 +47,10 @@ jobs:
             az storage container delete -n clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
             az storage container delete -n roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
             az storage container delete -n users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
-            az storage container create -n acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
-            az storage container create -n clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
-            az storage container create -n roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
-            az storage container create -n users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
+            az storage container create -n acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --public-access blob
+            az storage container create -n clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --public-access blob
+            az storage container create -n roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --public-access blob
+            az storage container create -n users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --public-access blob
             az storage blob upload-batch --destination acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/acquirers
             az storage blob upload-batch --destination clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/clients
             az storage blob upload-batch --destination roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/roles
