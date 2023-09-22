@@ -81,7 +81,7 @@ jobs:
           #az storage blob upload-batch --destination roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/roles
           #az storage blob upload-batch --destination users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/users
           az storage container delete -n test --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login
-          az storage container create -n test --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login --public-access blob
+          az storage container create -n test --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login --public-access blob --resource-group mil-d-data-rg
           az storage blob upload-batch --destination test --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/clients  --auth-mode key
 
   cleanup_runner:
