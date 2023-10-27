@@ -71,7 +71,7 @@ jobs:
           az config set defaults.group=${{ secrets.AZURE_STORAGE_ACCOUNT_GROUP }} --local
           az storage container delete -n acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login
           az storage container create -n acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --public-access blob --auth-mode login 
-          az storage blob upload-batch --destination acquirers --destination-path / --source src/main/conf/acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login
+          az storage blob upload-batch --destination acquirers --destination-path / --source src/main/conf/acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode key
           
           #az storage container delete -n test --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login
           #az storage container create -n test --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login --public-access blob --resource-group mil-d-data-rg
@@ -86,9 +86,9 @@ jobs:
           az storage container create -n clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --auth-mode login --public-access blob
           az storage container create -n roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --auth-mode login --public-access blob
           az storage container create -n users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --auth-mode login --public-access blob
-          az storage blob upload-batch --destination clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/clients --auth-mode login
-          az storage blob upload-batch --destination roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/roles   --auth-mode login
-          az storage blob upload-batch --destination users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/users   --auth-mode login
+          az storage blob upload-batch --destination clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/clients --auth-mode key
+          az storage blob upload-batch --destination roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/roles   --auth-mode key
+          az storage blob upload-batch --destination users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination-path / --source src/main/conf/users   --auth-mode key
 
 
   cleanup_runner:
