@@ -68,10 +68,10 @@ jobs:
       #
       - name: Upload configuration files for acquirers 
         run: |
-          az config set defaults.group=${{ secrets.AZURE_STORAGE_ACCOUNT_GROUP }} --local
-          az storage container delete -n acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login
-          az storage container create -n acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --public-access blob --auth-mode login 
-          az storage blob upload-batch --destination acquirers --destination-path / --source src/main/conf/acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode key
+          #az config set defaults.group=${{ secrets.AZURE_STORAGE_ACCOUNT_GROUP }} --local
+          #az storage container delete -n acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login
+          #az storage container create -n acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --public-access blob --auth-mode login 
+          #az storage blob upload-batch --destination acquirers --destination-path / --source src/main/conf/acquirers --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode key
           
           #az storage container delete -n test --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login
           #az storage container create -n test --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login --public-access blob --resource-group mil-d-data-rg
