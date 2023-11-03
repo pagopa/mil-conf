@@ -79,16 +79,20 @@ jobs:
 
       - name: Upload configuration files for authentication
         run: |
-          az config set defaults.group=${{ secrets.AZURE_STORAGE_ACCOUNT_GROUP }} --local
-          az storage container delete -n clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --auth-mode login
-          az storage container delete -n roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --auth-mode login
-          az storage container delete -n users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --auth-mode login
-          az storage container create -n clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --auth-mode login --public-access blob
-          az storage container create -n roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --auth-mode login --public-access blob
-          az storage container create -n users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --auth-mode login --public-access blob
-          az storage blob upload-batch --destination clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --destination-path / --source src/main/conf/clients --auth-mode key
-          az storage blob upload-batch --destination roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --destination-path / --source src/main/conf/roles   --auth-mode key
-          az storage blob upload-batch --destination users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --destination-path / --source src/main/conf/users   --auth-mode key
+          #az config set defaults.group=${{ secrets.AZURE_STORAGE_ACCOUNT_GROUP }} --local
+          #az storage container delete -n clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --auth-mode login
+          #az storage container delete -n roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --auth-mode login
+          #az storage container delete -n users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --auth-mode login
+          #az storage container create -n clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --auth-mode login --public-access blob
+          #az storage container create -n roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --auth-mode login --public-access blob
+          #az storage container create -n users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --auth-mode login --public-access blob
+          #az storage blob upload-batch --destination clients   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --destination-path / --source src/main/conf/clients --auth-mode key
+          #az storage blob upload-batch --destination roles     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --destination-path / --source src/main/conf/roles   --auth-mode key
+          #az storage blob upload-batch --destination users     --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME__AUTH }} --destination-path / --source src/main/conf/users   --auth-mode key
+          az config set defaults.group=mil-u-data-rg --local
+          az storage container delete -n clients --account-name miluauthst --auth-mode login
+          az storage container create -n clients --account-name miluauthst --auth-mode login --public-access blob
+          az storage blob upload-batch --destination clients --account-name miluauthst --destination-path / --source src/main/conf/clients --auth-mode key
 
 
   cleanup_runner:
