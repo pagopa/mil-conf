@@ -6,6 +6,6 @@
 	"terminalId": "NA",
 	"roles": [
 		"NoticePayer",
-		"OnboardToIDPay"
+		"EnrollToIDPay"
 	]
 }
