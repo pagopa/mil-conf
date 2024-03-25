@@ -1,0 +1,11 @@
+{
+	"acquirerId": "NA",
+	"channel": "NA",
+	"clientId": "88f2ba0d-60da-424f-9632-34e26e5f2fee",
+	"merchantId": "NA",
+	"terminalId": "NA",
+	"roles": [
+		"pos_service_provider",
+		"public_administration"
+	]
+}
