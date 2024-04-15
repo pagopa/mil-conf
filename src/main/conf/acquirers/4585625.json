@@ -1,14 +1,14 @@
 {
     "pspConfigForVerifyAndActivate": {
-        "psp": "AGID_01",
-        "broker": "97735020584",
-        "channel": "97735020584_08",
+        "psp": "TMIL0101",
+        "broker": "pagopamil01",
+        "channel": "pagopamil01_01",
         "password": "PLACEHOLDER"
     },
     "pspConfigForGetFeeAndClosePayment": {
-        "psp": "AGID_01",
-        "broker": "97735020584",
-        "channel": "97735020584_08",
+        "psp": "TMIL0101",
+        "broker": "pagopamil01",
+        "channel": "pagopamil01_01",
         "password": "PLACEHOLDER"
     }
 }
