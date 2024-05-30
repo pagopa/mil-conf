@@ -1,0 +1,10 @@
+{
+	"acquirerId": "NA",
+	"channel": "NA",
+	"clientId": "6010064c-ec73-4fa5-9ed5-5446af8920cf",
+	"merchantId": "NA",
+	"terminalId": "NA",
+	"roles": [
+		"token_info"
+	]
+}
