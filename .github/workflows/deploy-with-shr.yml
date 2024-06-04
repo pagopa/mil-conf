@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: Create GitHub Runner
         id: create_github_runner
-        uses: pagopa/eng-github-actions-iac-template/azure/github-self-hosted-runner-azure-create-action@3ac5488e332dcf0eaa58159a42b1b0f2015a5ec0
+        uses: pagopa/eng-github-actions-iac-template/azure/github-self-hosted-runner-azure-create-action@main
         with:
           client_id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant_id: ${{ secrets.AZURE_TENANT_ID }}
@@ -31,6 +31,7 @@ jobs:
           container_app_environment_name: ${{ secrets.AZURE_CONTAINER_APP_ENVIRONMENT_NAME }}
           resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
           pat_token: ${{ secrets.GIT_PAT }}
+          self_hosted_runner_image_tag: "v1.6.3"
 
 
   deploy:
